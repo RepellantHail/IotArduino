@@ -1,6 +1,9 @@
 {
     "configuration": "cpu=atmega2560",
     "board": "arduino:avr:mega",
-    "sketch": "Scketchs/readKeyPad/readKeyPad.ino",
-    "port": "/dev/ttyACM0"
+    "output": "../build",
+    "sketch": "Scketchs/04-colorWheel/04-colorWheel.ino",
+    "port": "/dev/ttyACM0",
+    "programmer": "arduinoasispatmega32u4",
+    "intelliSenseGen": "global"
 }
