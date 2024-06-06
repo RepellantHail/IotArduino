@@ -1,12 +1,12 @@
 #include <Encoder.h>
 
-#define RPIN 52
-#define GPIN 50
-#define BPIN 48
+#define RPIN 10
+#define GPIN 9
+#define BPIN 8
 #define DT_PIN 2
 #define CLK_PIN 3
 
-#define MAX_ENCODER_VALUE 300
+#define MAX_ENCODER_VALUE 12
 
 #define RED 255, 0, 0
 #define GREEN 0, 255, 0
@@ -40,6 +40,7 @@ void readInput()
   int newPos = myEncoder.read();
   if (newPos != lastPos)
   {
+    Serial.println(curPos);
     if (curPos == 0 && newPos < lastPos)
     {
       curPos = MAX_ENCODER_VALUE;
@@ -61,18 +62,47 @@ void readInput()
 
 void checkRegion()
 {
-  Serial.println(curPos);
-  if (curPos >= 0 && curPos < regionSize)
+  switch (curPos)
   {
-    setColor(RED);
-  }
-  else if (curPos >= regionSize && curPos < 2 * regionSize)
-  {
-    setColor(GREEN);
-  }
-  else if (curPos >= 2 * regionSize && curPos <= MAX_ENCODER_VALUE)
-  {
-    setColor(BLUE);
+  case 0: // RED
+    setColor(255, 0, 0);
+    break;
+  case 1: // Orange
+    setColor(255, 127, 0);
+    break;
+  case 2: // Yellow
+    setColor(255, 255, 0);
+    break;
+  case 3: // Lime Green
+    setColor(127, 255, 0);
+    break;
+  case 4: //  Green
+    setColor(0, 255, 0);
+    break;
+  case 5: // Blue Green
+    setColor(0, 255, 127);
+    break;
+  case 6: //  Cyan
+    setColor(0, 255, 255);
+    break;
+  case 7: //  Azure
+    setColor(0, 255, 127);
+    break;
+  case 8: //  Blue
+    setColor(0, 0, 255);
+    break;
+  case 9: //  Violet
+    setColor(127, 0, 255);
+    break;
+  case 10: //  Magenta
+    setColor(255, 0, 255);
+    break;
+  case 11: //  Rose
+    setColor(255, 0, 127);
+    break;
+  default:
+    setColor(0, 0, 0);
+    break;
   }
 }
 
